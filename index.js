@@ -12,7 +12,7 @@ const loadCityWeather = () => {
     spinner.removeAttribute("hidden");
 
     fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${"c4e705f458c9c6f55f91e0029eaea0eb"}`
+      `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${"c4e705f458c9c6f55f91e0029eaea0eb"}&units=metric`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -28,13 +28,9 @@ const displayCityWeather = (data) => {
   // weatherContainer.textContent = "";
   const div = document.createElement("div");
   div.innerHTML = `
-      <img src="https://openweathermap.org/img/wn/${
-        data.weather[0].icon
-      }.png" alt="" />
+      <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="" />
           <h1 >${data.name}</h1>
-          <h3><span>${(Number(data.main.temp) - 273).toFixed(
-            2
-          )}</span>&deg;C</h3>
+          <h3><span>${data.main.temp}</span>&deg;C</h3>
           <h1 class="lead">${data.weather[0].main}</h1>
       `;
   weatherContainer.appendChild(div);
